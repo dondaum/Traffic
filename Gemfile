@@ -5,6 +5,8 @@ source 'https://rubygems.org'
 gem 'rails', '~> 5.0.0'
 # Import bootstrapp
 gem 'bootstrap-sass', '~> 3.2.0'
+# Import bcrypt for hashing password
+gem 'bcrypt',         '~>3.1.11'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use Puma as the app server
