@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161031144311) do
+ActiveRecord::Schema.define(version: 20161213180355) do
+
+  create_table "distances", force: :cascade do |t|
+    t.string   "startpunkt"
+    t.string   "zielpunkt"
+    t.string   "verkehrsmittel"
+    t.integer  "user_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["user_id", "created_at"], name: "index_distances_on_user_id_and_created_at"
+    t.index ["user_id"], name: "index_distances_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name"

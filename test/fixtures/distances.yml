@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  startpunkt: MyString
+  zielpunkt: MyString
+  verkehrsmittel: MyString
+  user: one
+
+two:
+  startpunkt: MyString
+  zielpunkt: MyString
+  verkehrsmittel: MyString
+  user: two
