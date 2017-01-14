@@ -8,4 +8,7 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false}
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }
+  def feed
+  Distance.where("user_id = ?", id)
+  end
 end

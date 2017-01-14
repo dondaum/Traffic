@@ -8,7 +8,7 @@
             <li><%= link_to "Kontakt", contact_path %></li>
             <% if logged_in? %>
                 <li><%= link_to "Dashboard", current_user %></li>
-                <li><%= link_to "Eintrag erfassen", "#" %></li>
+                <li><%= link_to "Eintrag erfassen", distance_path %></li>
                 <li><%= link_to "Log out", logout_path, method: "delete" %></li>
               </ul>
             </li>
