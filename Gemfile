@@ -11,6 +11,10 @@ gem 'bcrypt',         '~>3.1.11'
 gem 'puma', '~> 3.0'
 # Useing geocoder gem for google maps and distance
 gem 'geocoder'
+# Use LazyHighCharts to create flexible charts in Dashboard
+gem 'lazy_high_charts'
+# Not sure which one will do it
+gem 'highcharts-rails'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets

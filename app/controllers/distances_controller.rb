@@ -1,11 +1,13 @@
 class DistancesController < ApplicationController
-before_action :logged_in_user, only: [:new, :create, :destroy]
+before_action :logged_in_user, only: [:show, :new, :create, :destroy]
 
   def new
     @distance = Distance.new
   end
 
   def show
+    @user = current_user
+    @distances  = @user.distances
   end
 
   def create

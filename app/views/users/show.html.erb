@@ -1,3 +1,4 @@
+<% provide(:title, @user.first_name + " " + @user.name) %>
 <div class="container">
   <div class="alert alert-info" role="alert">
     <div class="page-header">
@@ -6,67 +7,49 @@
     </div>
   </div>
 </div>
+<div class="col-sm-3 col-md-2 sidebar">
+  <ul class="nav nav-sidebar">
+    <li><a href="#">Reports</a></li>
+    <li><a href="#">Analytics</a></li>
+    <li><a href="#">Export</a></li>
+    <li><a href= "#" >Beiträge (<%= @user.distances.count %>)</a></li>
+  </ul>
+</div>
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+  <h3 class="page-header">Zurückgelegte Kilometer: <%= @distances.sum(:range).round %> km</h3>
+
+  <div class="row placeholders">
+    <div class="col-xs-6 col-sm-3 placeholder">
+      <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
+      <h4>Auto</h4>
+      <span class="text-muted"><%= @distance_count = Distance.where(verkehrsmittel: "Auto", user_id: current_user).size %></span>
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder">
+      <span class="glyphicon glyphicon-flash" aria-hidden="true"></span>
+      <h4>Zug</h4>
+      <span class="text-muted"><%= @distance_count = Distance.where(verkehrsmittel: "Zug", user_id: current_user).size %></span>
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder">
+      <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>
+      <h4>Bus</h4>
+      <span class="text-muted"><%= @distance_count = Distance.where(verkehrsmittel: "Bus", user_id: current_user).size %></span>
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder">
+      <span class="glyphicon glyphicon-plane" aria-hidden="true"></span>
+      <h4>Flugzeug</h4>
+      <span class="text-muted"><%= @distance_count = Distance.where(verkehrsmittel: "Flugzeug", user_id: current_user).size %></span>
+    </div>
+  </div>
+</div>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-3 col-md-2 sidebar">
-      <ul class="nav nav-sidebar">
-        <li><a href="#">Reports</a></li>
-        <li><a href="#">Analytics</a></li>
-        <li><a href="#">Export</a></li>
-        <li><a href="#">Beiträge (<%= @user.distances.count %>)</a></li>
-      </ul>
+    <% if current_user.distances.any? %>
+      <%= high_chart("some_id", @chart) %>
+      <%= high_chart("some_id4", @chart4) %>
+      <%= high_chart("some_id5", @chart5) %>
+      <%= high_chart("some_id6", @chart6) %>
+    <% else  %> <h3> Sie haben noch keine Fahrt gespeichert. Gehen Sie im Menü
+      auf Eintrag erfassen um eine neue Fahrt zu speichern. </h3>
+    <% end %>
     </div>
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-      <h3 class="page-header">Zurückgelegte Kilometer: <%= @distances.sum(:range).round %> km</h3>
-
-      <div class="row placeholders">
-        <div class="col-xs-6 col-sm-3 placeholder">
-          <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
-          <h4>Auto</h4>
-          <span class="text-muted"><%= @distance_count = Distance.where(verkehrsmittel: "Auto", user_id: current_user).size %></span>
-        </div>
-        <div class="col-xs-6 col-sm-3 placeholder">
-          <span class="glyphicon glyphicon-flash" aria-hidden="true"></span>
-          <h4>Zug</h4>
-          <span class="text-muted"><%= @distance_count = Distance.where(verkehrsmittel: "Zug", user_id: current_user).size %></span>
-        </div>
-        <div class="col-xs-6 col-sm-3 placeholder">
-          <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>
-          <h4>Bus</h4>
-          <span class="text-muted"><%= @distance_count = Distance.where(verkehrsmittel: "Bus", user_id: current_user).size %></span>
-        </div>
-        <div class="col-xs-6 col-sm-3 placeholder">
-          <span class="glyphicon glyphicon-plane" aria-hidden="true"></span>
-          <h4>Flugzeug</h4>
-          <span class="text-muted"><%= @distance_count = Distance.where(verkehrsmittel: "Flugzeug", user_id: current_user).size %></span>
-        </div>
-      </div>
-     </div>
-    </div>
-    <h4>Alle gespeicherten Fahrten</h4>
-
-    <table class=" table table-striped" data-sort-name="ID" data-sort-order="desc">
-      <thead>
-        <tr>
-          <th data-field="Startpunkt" data-sortable="true">Startpunkt</th>
-          <th data-field="Zielpunkt" data-sortable="true">Zielpunkt</th>
-          <th data-field="Verkehrsmittel" data-sortable="true">Verkehrsmittel</th>
-          <th data-field="Datum" data-sortable="true">Datum</th>
-          <th data-field="Entfernung" data-sortable="true">Entfernung</th>
-
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @distances.each do |distance| %>
-          <tr>
-            <td><%= distance.startpunkt %></td>
-            <td><%= distance.zielpunkt %></td>
-            <td><%= distance.verkehrsmittel %></td>
-            <td><%= distance.created_at %></td>
-            <td><%= distance.range %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
   </div>

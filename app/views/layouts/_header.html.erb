@@ -1,21 +1,29 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="container">
-    <span class="label label-info align-middle">Created by Sepp</span>
-      <nav>
-        <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to "Home",    root_path %></li>
-            <li><%= link_to "Hilfe",   help_path %></li>
-            <li><%= link_to "Kontakt", contact_path %></li>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	  <div class="container-fluid">
+		  <!-- Titel und Schalter werden für eine bessere mobile Ansicht zusammengefasst -->
+		  <div class="navbar-header">
+			  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarBeispiel-1">
+			  <span class="sr-only">Navigation ein-/ausblenden</span>
+			  <span class="icon-bar"></span>
+			  <span class="icon-bar"></span>
+			  <span class="icon-bar"></span>
+			  </button>
+		  	 <a class="navbar-brand"><%= link_to "Travel app", root_path, id: "logo" %></a>
+		  </div>
+	 <!-- Alle Navigationslinks, Formulare und anderer Inhalt werden hier zusammengefasst und können dann ein- und ausgeblendet werden -->
+  	  <div class="collapse navbar-collapse" id="navbarBeispiel-1">
+  	 	 <ul class="nav navbar-nav">
+  	  		<li class="active"><li><%= link_to "Hilfe",   help_path %></li>
+          <li><%= link_to "Kontakt", contact_path %></li>
             <% if logged_in? %>
-                <li><%= link_to "Dashboard", current_user %></li>
-                <li><%= link_to "Eintrag erfassen", distance_path %></li>
-                <li><%= link_to "Log out", logout_path, method: "delete" %></li>
-              </ul>
-            </li>
-          <% else %>
-            <li><%= link_to "Log in", login_path %></li>
-          <% end %>
-        </ul>
-      </nav>
-    </div>
-</header>
+              <li><%= link_to "Dashboard", current_user %></li>
+              <li><%= link_to "Eintrag erfassen", distance_path %></li>
+              <li><%= link_to "Fahrten", range_path %></li>
+              <li><%= link_to "Log out", logout_path, method: "delete" %></li>
+            <% else %>
+              <li><%= link_to "Log in", login_path %></li>
+            <% end %>
+  	  	</ul>
+  	  </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>

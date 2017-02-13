@@ -1,0 +1,36 @@
+<% provide(:title, "Fahrten") %>
+<h1>Alle Fahrten</h1>
+<div class="container-fluid">
+  <% if current_user.distances.any? %>
+
+      <table class=" table table-striped" data-sort-name="ID" data-sort-order="desc">
+        <thead>
+          <tr>
+            <th data-field="Startpunkt" data-sortable="true">Startpunkt</th>
+            <th data-field="Zielpunkt" data-sortable="true">Zielpunkt</th>
+            <th data-field="Verkehrsmittel" data-sortable="true">Verkehrsmittel</th>
+            <th data-field="Datum" data-sortable="true">Datum</th>
+            <th data-field="Entfernung" data-sortable="true">Entfernung</th>
+
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @distances.each do |distance| %>
+            <tr>
+              <td><%= distance.startpunkt %></td>
+              <td><%= distance.zielpunkt %></td>
+              <td><%= distance.verkehrsmittel %></td>
+              <td><%= distance.created_at %></td>
+              <td><%= distance.range %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <% else %>
+        <div class="alert alert-warning fade in">
+          <div class="page-header">Noch keine Fahrten gespeichert.
+          </div>
+        </div>
+      <% end %>
+</div>

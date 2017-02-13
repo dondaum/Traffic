@@ -19,7 +19,9 @@
   }
 
   body {
-    padding-top: 60px;
+    padding-top: 51px;
+    margin: 0;
+    width: auto;
   }
 
   .hero {
@@ -44,13 +46,25 @@
     margin-bottom: 10px;
   }
 
+
 /* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+.container h1{
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: left;
+}
 
 h1 {
   font-size: 3em;
   letter-spacing: -2px;
   margin-bottom: 30px;
-  color: white;
+  text-align: center;
 }
 
 h2 {
@@ -60,4 +74,27 @@ h2 {
   text-align: left;
   font-weight: normal;
   color: white;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+/* header */
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+}
+
+#logo:hover {
+  color: #fff;
+  text-decoration: none;
 }

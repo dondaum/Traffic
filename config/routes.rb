@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   get '/distance', to: 'distances#new'
+  get '/range', to: 'distances#show'
   post '/distance',  to: 'distances#create'
   resources :distances
 
