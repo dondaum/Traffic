@@ -15,6 +15,10 @@ gem 'geocoder'
 gem 'lazy_high_charts'
 # Not sure which one will do it
 gem 'highcharts-rails'
+# Gmaps4rails to simply create a Google Maps
+gem 'gmaps4rails'
+# Get underscore_js
+gem 'underscore-rails'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets

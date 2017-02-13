@@ -47,6 +47,25 @@
   }
 
 
+ #directions {
+    position: relative;
+    margin-top: 40px;
+    width: 100%;
+    padding-bottom: 56.25%; /* Ratio 16:9 ( 100%/16*9 = 56.25% ) */
+}
+#directions > *{
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
