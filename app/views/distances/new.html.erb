@@ -1,5 +1,40 @@
 <% provide(:title, "Fahrten erfassen") %>
 <h1>Neue Fahrt speichern</h1>
+<div class="row">
+ <div class="col-md-6 col-md-offset-3">
+   <form id="frm1" onsubmit="return false;">
+     <div class ="form-group">
+       <label for = "Startpunkt"> Startpunkt:</label>
+       <input type="text" class="form-control" id="Start">
+     </div>
+     <div class ="form-group">
+       <label for = "Zielpunkt"> Zielpunkt:</label>
+       <input type="text" class="form-control" id="Ziel">
+     </div>
+     <div class ="form-group">
+       <label for="Reisemittel">Reisemittel</label>
+       <select class="form-control" id="Mode">
+         <option value="WALKING">Zu Fuss</option>
+         <option value="BICYCLING">Fahrrad</option>
+         <option value="DRIVING">Auto</option>
+         <option value="TRANSIT">öffentlicher Verkehr</option>
+       </select>
+     </div>
+     <div id="display" class="form-control">Entfernung in KM</div>
+     <button type="submit" onclick="calcRoute()" class="btn btn-primary">Berechnen</button>
+   </form>
+ </div>
+</div>
+ <%= form_for@distance do |f| %>
+ <%= f.hidden_field :startpunkt, value: params[:startpunkt] %><br>
+ <%= f.hidden_field :zielpunkt, value: "asd" %><br>
+ <%= f.hidden_field :range, value: "" %><br>
+ <%= f.submit "Jetzt speichern", class: "submit enabled" %>
+ <% end %>
+
+  <div class ="container">
+    <div id="directions"></div>
+  </div>
   <div class="row">
    <div class="col-md-6 col-md-offset-3">
      <%= form_for(@distance, url: distance_path) do |f| %>
@@ -18,24 +53,26 @@
      <% end %>
    </div>
   </div>
-  <div class ="container">
-        <div id="directions"></div>
-  </div>
 <script>
   var directionsDisplay = new google.maps.DirectionsRenderer();
   var directionsService = new google.maps.DirectionsService();
 
+
   function calcRoute() {
-    var origin      = new google.maps.LatLng(41.850033, -87.6500523);
-    var destination = new google.maps.LatLng(42.850033, -85.6500523);
+    var origin      = document.getElementById("Start").value;
+    var destination = document.getElementById("Ziel").value;
+    var mode1 = document.getElementById("Mode").value;
     var request = {
         origin:      origin,
         destination: destination,
-        travelMode:  google.maps.TravelMode.DRIVING
+        travelMode:  google.maps.TravelMode[mode1]
     };
     directionsService.route(request, function(response, status) {
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
+        var gdistance = response.routes[0].legs[0].distance.value; //distance in meter
+        var display=document.getElementById("display")
+        display.innerHTML=parseInt(gdistance)/1000+" Kilometer";
       }
     });
   }

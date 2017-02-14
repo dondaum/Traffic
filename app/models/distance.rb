@@ -11,9 +11,12 @@ before_save :geocode_endpoints, :set_range
   geocoded_by :zielpunkt, :latitude => :destination_lat, :longitude => :destination_long
   after_validation :geocode, :if => :startpunkt_changed?
   after_validation :geocode, :if => :zielpunkt_changed?
+
+
 end
 
 private
+
 
 def geocode_endpoints
   if startpunkt_changed?
