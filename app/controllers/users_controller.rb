@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+before_action :current_user, only: [:show]
+
   def new
     @user = User.new
   end
@@ -7,14 +9,16 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @distances  = @user.distances
 
+
+
     @chart = LazyHighCharts::HighChart.new('graph') do |f|
       f.title(text: "Zurückgelegte Kilometer nach Verkehrsmittel")
-      f.xAxis(categories:  Distance.select(:verkehrsmittel).map(&:verkehrsmittel).uniq )
+      f.xAxis(categories:  ["Auto", "öffentlicher Verkehr", "Fahrrad", "Zu Fuss"])
       f.series(name: "Kilomenter", yAxis: 0, data: [
-          Distance.where(verkehrsmittel: "Bus", user_id: current_user).sum(:range),
-          Distance.where(verkehrsmittel: "Flugzeug", user_id: current_user).sum(:range),
-          Distance.where(verkehrsmittel: "Zug", user_id: current_user).sum(:range),
-          Distance.where(verkehrsmittel: "Auto", user_id: current_user).sum(:range)
+          Distance.where(verkehrsmittel: "DRIVING", user_id: current_user).sum(:gmaprange),
+          Distance.where(verkehrsmittel: "TRANSIT", user_id: current_user).sum(:gmaprange),
+          Distance.where(verkehrsmittel: "BICYCLING", user_id: current_user).sum(:gmaprange),
+          Distance.where(verkehrsmittel: "WALKING", user_id: current_user).sum(:gmaprange)
         ]
        )
 
@@ -23,16 +27,17 @@ class UsersController < ApplicationController
       ]
       f.chart({defaultSeriesType: "column"})
     end
+
     @chart4 = LazyHighCharts::HighChart.new('pie') do |f|
       f.chart({:defaultSeriesType=>"pie" , :margin=> [50, 50, 60, 50]} )
       series = {
         :type=> 'pie',
         :name=> 'Verkehrsmittel Verteilung',
         :data=> [
-          ['Bus', Distance.where(verkehrsmittel: "Bus", user_id: current_user).sum(:range)],
-          ['Flugzeug', Distance.where(verkehrsmittel: "Flugzeug", user_id: current_user).sum(:range)],
-          ['Zug', Distance.where(verkehrsmittel: "Zug", user_id: current_user).sum(:range)],
-          ['Auto', Distance.where(verkehrsmittel: "Auto", user_id: current_user).sum(:range)]
+          ['Auto', Distance.where(verkehrsmittel: "DRIVING", user_id: current_user).sum(:gmaprange)],
+          ['öffentliche Verkehrsmittel', Distance.where(verkehrsmittel: "TRANSIT", user_id: current_user).sum(:gmaprange)],
+          ['Fahrrad', Distance.where(verkehrsmittel: "BICYCLING", user_id: current_user).sum(:gmaprange)],
+          ['Zu fuss', Distance.where(verkehrsmittel: "WALKING", user_id: current_user).sum(:gmaprange)]
         ]
       }
       f.series(series)
@@ -54,12 +59,13 @@ class UsersController < ApplicationController
     @chart5 = LazyHighCharts::HighChart.new('graph') do |f|
       f.title(:text => "Fahrten im Zeitverlauf")
       f.xAxis(
-        type: 'datetime'
+        type: 'datetime',
+        categories: giv_me_date
        )
 
-      f.series(:name => "Kilomenter", :yAxis => 0, :data => [
-        ["2017-01-15 11:01:16 UTC", 222], ["2017-01-20 11:01:16 UTC", 100], ["2017-01-30 11:01:16 UTC", 500]
-        ])
+      f.series(:name => "Kilomenter",
+              :data => @distances.map{ |f| [f.created_at.utc.strftime("%F %X"+" UTC"), f.gmaprange.to_f]}.inspect
+      )
 
       f.yAxis [
         {:title => {:text => "Kilometer", :margin => 70} },
@@ -74,6 +80,7 @@ class UsersController < ApplicationController
       f.title(:text => "Fahrten im Zeitverlauf")
       f.xAxis(
         type: 'datetime',
+        categories: giv_me_date,
         dateTimeLabelFormats: {second: '%l:%M:%S %p',
                            minute: '%l:%M %p',
                            hour: '%l:%M %p',
@@ -93,6 +100,14 @@ class UsersController < ApplicationController
       f.legend(:align => 'right', :verticalAlign => 'top', :y => 75, :x => -50, :layout => 'vertical',)
       f.chart({:defaultSeriesType=>"line"})
     end
+
+    @chart7 = LazyHighCharts::HighChart.new('column') do |f|
+       f.series(:name=>'John',:data=> [3, 20, 3, 5, 4, 10, 12 ])
+       f.series(:name=>'Jane',:data=>[1, 3, 4, 3, 3, 5, 4,-46] )
+       f.title({ :text=>"example test title from controller"})
+       f.options[:chart][:defaultSeriesType] = "column"
+       f.plot_options({:column=>{:stacking=>"percent"}})
+    end
   end
 
   def create
@@ -106,6 +121,20 @@ class UsersController < ApplicationController
       end
   end
 
+
+  def data_new
+     var1 = distances.map{ |f| [f.gmaprange]}.inspect
+     @var2 = var1.compact
+  end
+
+   def init()
+   mess = []
+   # -- save me the SUM() of Messages for every day in the last week
+   (0..6).each do  |i|
+     mess[i] = Distance.count
+   end
+ end
+
   private
 
   def user_params
@@ -118,5 +147,14 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to(root_url) unless current_user?(@user)
   end
+
+  def giv_me_date
+    date = []
+    (1..7).each do  |i|
+      date[i] = Time.now - (60 * 60 * 24)*(i-1)
+      date[i] = date[i].strftime("%d/%m")
+    end
+   return date.reverse
+ end
 
 end

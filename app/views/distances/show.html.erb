@@ -2,7 +2,16 @@
 <h1>Alle Fahrten</h1>
 <div class="container-fluid">
   <% if current_user.distances.any? %>
-
+  <div class="col-lg-10 col-lg-offset-1">
+    <div class="card card-inverse">
+      <div class="card-block">
+        <h4 class="card-title">Downloard Center<span class="badge badge-info">Neu</span></h4>
+        <h6 class="card-subtitle mb-2 text-muted">csv Download</h6>
+        <p class="card-text">Alle Fahrten können hier als csv Datei heruntergeladen werden.</p>
+         <%= link_to "Download", "/range.csv", class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
       <table class=" table table-striped" data-sort-name="ID" data-sort-order="desc">
         <thead>
           <tr>
@@ -10,8 +19,9 @@
             <th data-field="Zielpunkt" data-sortable="true">Zielpunkt</th>
             <th data-field="Verkehrsmittel" data-sortable="true">Verkehrsmittel</th>
             <th data-field="Datum" data-sortable="true">Datum</th>
+            <th data-field="Entfernung Luftlinie" data-sortable="true">Entfernung Luftline</th>
             <th data-field="Entfernung" data-sortable="true">Entfernung</th>
-
+            <th data-field="Entfernung" data-sortable="true">Test</th>
           </tr>
         </thead>
 
@@ -23,6 +33,8 @@
               <td><%= distance.verkehrsmittel %></td>
               <td><%= distance.created_at %></td>
               <td><%= distance.range %></td>
+              <td><%= distance.gmaprange %></td>
+              <td><%= link_to "Eintrag löschen", distance, method: :delete, data: { confirm: "Sind Sie sicher?" }%></td>
             </tr>
           <% end %>
         </tbody>

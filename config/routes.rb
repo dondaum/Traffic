@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   get '/distance', to: 'distances#new'
   get '/range', to: 'distances#show'
   post '/distance',  to: 'distances#create'
+  delete '/distance',  to: 'distances#destroy'
   resources :distances
+
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

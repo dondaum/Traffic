@@ -2,57 +2,42 @@
 <h1>Neue Fahrt speichern</h1>
 <div class="row">
  <div class="col-md-6 col-md-offset-3">
-   <form id="frm1" onsubmit="return false;">
+   <div class="alert alert-info">
+     <strong>Info!</strong> Bitte Fahrt erst berechnen, danach speichern. Flüge
+                            können bisher nicht gespeichert werden.
+   </div>
+   <form id="frm1" action="/distance" method="post">
+      <%= render 'shared/error_messages2' %>
      <div class ="form-group">
        <label for = "Startpunkt"> Startpunkt:</label>
-       <input type="text" class="form-control" id="Start">
+       <input type="text" class="form-control" id="Start" name="distance[startpunkt]">
      </div>
      <div class ="form-group">
        <label for = "Zielpunkt"> Zielpunkt:</label>
-       <input type="text" class="form-control" id="Ziel">
+       <input type="text" class="form-control" id="Ziel" name="distance[zielpunkt]">
      </div>
      <div class ="form-group">
        <label for="Reisemittel">Reisemittel</label>
-       <select class="form-control" id="Mode">
+       <select class="form-control" id="Mode" name="distance[verkehrsmittel]">
          <option value="WALKING">Zu Fuss</option>
          <option value="BICYCLING">Fahrrad</option>
          <option value="DRIVING">Auto</option>
-         <option value="TRANSIT">öffentlicher Verkehr</option>
+         <option value="TRANSIT">Öffentliche Verkehrsmittel</option>
        </select>
      </div>
-     <div id="display" class="form-control">Entfernung in KM</div>
-     <button type="submit" onclick="calcRoute()" class="btn btn-primary">Berechnen</button>
+     <div class ="form-group">
+       <label for = "Entfernung"> Entfernung in Kilomenter:</label>
+       <input type="number" step= "any" class="form-control" id="Entfernung" name="distance[gmaprange]">
+     </div>
+     <button type="button" onclick="calcRoute()" class="btn btn-info">Berechnen</button>
+     <button type="submit" value="Submit This Form" class="btn btn-success">Speichern</button>
+     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
    </form>
  </div>
 </div>
- <%= form_for@distance do |f| %>
- <%= f.hidden_field :startpunkt, value: params[:startpunkt] %><br>
- <%= f.hidden_field :zielpunkt, value: "asd" %><br>
- <%= f.hidden_field :range, value: "" %><br>
- <%= f.submit "Jetzt speichern", class: "submit enabled" %>
- <% end %>
-
-  <div class ="container">
-    <div id="directions"></div>
-  </div>
-  <div class="row">
-   <div class="col-md-6 col-md-offset-3">
-     <%= form_for(@distance, url: distance_path) do |f| %>
-       <%= render 'shared/error_messages2' %>
-
-       <%= f.label :startpunkt, "Startpunkt" %>
-       <%= f.text_field :startpunkt, class: 'form-control' %>
-
-       <%= f.label :zielpunkt, "Zielpunkt" %>
-       <%= f.text_field :zielpunkt, class: 'form-control' %>
-
-       <%= f.label :verkehrsmittel, "Verkehrsmittel" %>
-       <%= f.select :verkehrsmittel, ["Auto", "Zug", "Bus", "Flugzeug"], :prompt => "Bitte auswählen" %>
-
-       <%= f.submit "Fahrt speichern", class: "btn btn-info" %>
-     <% end %>
-   </div>
-  </div>
+<div class ="container">
+  <div id="directions"></div>
+</div>
 <script>
   var directionsDisplay = new google.maps.DirectionsRenderer();
   var directionsService = new google.maps.DirectionsService();
@@ -71,9 +56,12 @@
       if (status == google.maps.DirectionsStatus.OK) {
         directionsDisplay.setDirections(response);
         var gdistance = response.routes[0].legs[0].distance.value; //distance in meter
-        var display=document.getElementById("display")
-        display.innerHTML=parseInt(gdistance)/1000+" Kilometer";
-      }
+        var x = document.getElementById("Entfernung");
+      //  x.value = parseInt(gdistance)/1000;
+        x.value = parseFloat((Math.round(gdistance * 100) / 100)/1000).toFixed(0);
+      } else {
+      window.alert('Fahrt kann nicht berechnet werden. Grund: ' + status);
+    }
     });
   }
 
@@ -83,4 +71,5 @@
   handler.buildMap({ internal: {id: 'directions'}}, function(){
     directionsDisplay.setMap(handler.getMap());
   });
+
 </script>

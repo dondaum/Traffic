@@ -1,7 +1,145 @@
 <% provide(:title, "Hilfe") %>
-<h1>Hilfe</h1>
+<h1>FAQs</h1>
 <div class="container">
-  <div class="well well-lg">
-        <p>Benötigen Sie Hilfe? Dann schreiben Sie uns unter...</p>
-  </div>
+    <br />
+    <br />
+    <br />
+
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        Hier finden Sie Antworten zu möglichen Fragen.
+    </div>
+
+    <br />
+
+    <div class="panel-group" id="accordion">
+        <div class="faqHeader">Allgemeine Fragen</div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Was genau macht die Travel App?</a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="panel-body">
+              Die Travel App steht jederzeit als eine Art Reisetagebuch bereit. Mit ihr kann man alle Fahrten speichern und jederzeit
+              analysieren wie weit und wo man gefahren ist. 
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTen">Ist die Anmeldung kostenfrei?</a>
+                </h4>
+            </div>
+            <div id="collapseTen" class="panel-collapse collapse">
+                <div class="panel-body">
+                    Klar. Die Anmeldung und Nutzung der Seite ist komplett kostenfrei. Keine verstecken Kosten.
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">Warum kann ich keine Flüge speichern?</a>
+                </h4>
+            </div>
+            <div id="collapseEleven" class="panel-collapse collapse">
+                <div class="panel-body">
+                    Zur Zeit können keine Flüge gespeichert werden. In der zweiten Ausbaustufe werden diese jedoch integriert.
+                </div>
+            </div>
+        </div>
+
+        <div class="faqHeader">Anmelden</div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Wer kann sich anmelden?</a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse">
+                <div class="panel-body">
+                    Jeder kann sich kostenfrei für die Travel App anmelden.
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Ich möchte die Travel App nutzen. Wie gehe ich vor?</a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse">
+                <div class="panel-body">
+                    Ganz einfach:
+                    <ul>
+                        <li>Melde dich mit einer E-Mail Adresse an.</li>
+                        <li>Du wirst direkt auf das Dasbhoard weitergeleitet</li>
+                        <li>Gehe im Menü auf neue Fahrt erstellen</li>
+                        <li>Klicke Berechnen. Danach speichern</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">Welche Daten werden benötigt?</a>
+                </h4>
+            </div>
+            <div id="collapseFive" class="panel-collapse collapse">
+                <div class="panel-body">
+                    Name, Vorname, E-Mail Adresse und Passwort. Diese Daten werden nicht an Dritte weiter gegeben.
+                    <br />
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix">Warum soll ich mich anmelden?</a>
+                </h4>
+            </div>
+            <div id="collapseSix" class="panel-collapse collapse">
+                <div class="panel-body">
+                    Es gibt einige Gründe:
+                    <ul>
+                        <li>Du unterstützt Kreativität.</li>
+                        <li>Du hast Freude daran immer und jederzeit über deine Reisen und Bewegungen informiert zu sein</li>
+                        <li>Du hast nichts besseres zu tun =) </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="faqHeader">Entwicklung</div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">Wie enstand diese Seite?</a>
+                </h4>
+            </div>
+            <div id="collapseFour" class="panel-collapse collapse">
+                <div class="panel-body">
+                  Viele Dinge sind auf Vorlage von Anleitungen und Hilfeforen entstanden. Besonders zu erwähnen ist die Anleitung von Michael Hartl über Ruby on Rails.
+                  Stackoverflow natürlich für alle Fehler und Fragen dieser Welt. Twitter Bootstrap, den freien Bootsrap Vorlagen und pexel für die Bilder.
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">Wie geht es weiter?</a>
+                </h4>
+            </div>
+            <div id="collapseSeven" class="panel-collapse collapse">
+                <div class="panel-body">
+                    Der Entwicklung ist keine Grenzen gesetzt. Denkbar sind Datenexporte als CSV/Excel, die zur Zeit nicht funktionieren.
+                    Informationen über Reisedauer und Kostenergänzungsoptionen. Möglichkeiten anderen Usern zu folgen und über deren
+                    neue Fahrten informiert zu werden....und, und und. Gerne Feedback für Ideen und Einsatzmöglichkeiten.
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

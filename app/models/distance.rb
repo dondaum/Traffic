@@ -11,9 +11,20 @@ before_save :geocode_endpoints, :set_range
   geocoded_by :zielpunkt, :latitude => :destination_lat, :longitude => :destination_long
   after_validation :geocode, :if => :startpunkt_changed?
   after_validation :geocode, :if => :zielpunkt_changed?
+  validates :gmaprange, presence: true
 
+
+  def self.to_csv
+    CSV.generate do |csv|
+      csv << column_names
+      all.each do |distance|
+        csv << distance.attributes.values_at(*column_names)
+      end
+    end
+  end
 
 end
+
 
 private
 

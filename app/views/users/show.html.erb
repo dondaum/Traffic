@@ -1,46 +1,19 @@
 <% provide(:title, @user.first_name + " " + @user.name) %>
-<div class="container">
-  <div class="alert alert-info" role="alert">
-    <div class="page-header">
-      <h1><small>Willkommen <%=@user.first_name%>! Entdecken Sie Ihr
-        Dashboard.</small></h1>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Dashboard von <%=@user.first_name + " " + @user.name%></h1>
+        </div>
+        <!-- /.col-lg-12 -->
     </div>
-  </div>
-</div>
-<div class="col-sm-3 col-md-2 sidebar">
-  <ul class="nav nav-sidebar">
-    <li><a href="#">Reports</a></li>
-    <li><a href="#">Analytics</a></li>
-    <li><a href="#">Export</a></li>
-    <li><a href= "#" >Beiträge (<%= @user.distances.count %>)</a></li>
-  </ul>
-</div>
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-  <h3 class="page-header">Zurückgelegte Kilometer: <%= @distances.sum(:range).round %> km</h3>
-
-  <div class="row placeholders">
-    <div class="col-xs-6 col-sm-3 placeholder">
-      <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
-      <h4>Auto</h4>
-      <span class="text-muted"><%= @distance_count = Distance.where(verkehrsmittel: "Auto", user_id: current_user).size %></span>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-1 main">
+      <div class="card">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Gesamt Anzahl Fahrten: <%= @user.distances.count %></li>
+          <li class="list-group-item">Zurückgelegte Kilometer nach Luftlinie: <%= @distances.sum(:range).round %> km</li>
+          <li class="list-group-item">Zurückgelegte Kilometer: <%= @distances.sum(:gmaprange).round %> km</li>
+        </ul>
+      </div>
     </div>
-    <div class="col-xs-6 col-sm-3 placeholder">
-      <span class="glyphicon glyphicon-flash" aria-hidden="true"></span>
-      <h4>Zug</h4>
-      <span class="text-muted"><%= @distance_count = Distance.where(verkehrsmittel: "Zug", user_id: current_user).size %></span>
-    </div>
-    <div class="col-xs-6 col-sm-3 placeholder">
-      <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>
-      <h4>Bus</h4>
-      <span class="text-muted"><%= @distance_count = Distance.where(verkehrsmittel: "Bus", user_id: current_user).size %></span>
-    </div>
-    <div class="col-xs-6 col-sm-3 placeholder">
-      <span class="glyphicon glyphicon-plane" aria-hidden="true"></span>
-      <h4>Flugzeug</h4>
-      <span class="text-muted"><%= @distance_count = Distance.where(verkehrsmittel: "Flugzeug", user_id: current_user).size %></span>
-    </div>
-  </div>
-</div>
 <div class="container-fluid">
   <div class="row">
     <% if current_user.distances.any? %>
@@ -48,6 +21,11 @@
       <%= high_chart("some_id4", @chart4) %>
       <%= high_chart("some_id5", @chart5) %>
       <%= high_chart("some_id6", @chart6) %>
+      <%= high_chart("some_id7", @chart7) %>
+      <%= @distances.map{ |f| [f.created_at.utc, f.gmaprange.to_f]}.inspect %>
+      <%= @distances.select{ |f| [f.gmaprange || 0.0]}.map(&:gmaprange) %>
+      <%= @var2 %>
+      <%= @distances.map{ |f| [f.created_at.utc.strftime("%F %X"+" UTC"), f.gmaprange.to_f]}.inspect %>
     <% else  %> <h3> Sie haben noch keine Fahrt gespeichert. Gehen Sie im Menü
       auf Eintrag erfassen um eine neue Fahrt zu speichern. </h3>
     <% end %>

@@ -1,14 +1,116 @@
 <% provide(:title, "Home") %>
-<div class="hero">
-    <div class ="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1>TRAVEL APP</h1>
-        <p class="text muted">Verfolge deine Reisen mit der Travel-App!
-          <p>
-            <%= link_to "Jetzt Starten!", signup_path, class: "btn btn-info btn-lg" %>
-          </p>
-          <h2> <%= link_to "bereits angemeldet?", login_path %> </h2>
-        </p>
-      </div>
-    </div>
-</div>
+<!-- Header -->
+   <header id="top" class="header">
+       <div class="text-vertical-center">
+           <h1>Travel APP</h1>
+           <h3>Verfolge deine Reisen mit der Travel-App!</h3>
+           <br>
+           <%= link_to "Jetzt Starten!", signup_path, class: "btn btn-dark btn-lg" %>
+           <%= link_to "bereits angemeldet?", login_path, class: "btn btn-lg btn-dark:focus" %>
+       </div>
+   </header>
+
+   <!-- About --> <!-- Theme from startbootstrap.com / Images from pexels-->
+   <section id="about" class="about">
+       <div class="container">
+           <div class="row">
+               <div class="col-lg-12 text-center">
+                   <h2>Dein persönliches Reisetagebuch. Verfolge deine Reisen!</h2>
+                   <p class="lead">Gratis anmelden. Fahrt berechnen, speichern und verfolgen.</p>
+               </div>
+           </div>
+           <!-- /.row -->
+       </div>
+       <!-- /.container -->
+   </section>
+
+   <!-- Services -->
+   <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+   <section id="services" class="services bg-primary">
+       <div class="container">
+           <div class="row text-center">
+               <div class="col-lg-10 col-lg-offset-1">
+                   <h2>Unsere Leistungen</h2>
+                   <hr class="small">
+                   <div class="row">
+                       <div class="col-md-3 col-sm-6">
+                           <div class="service-item">
+                               <span class="fa-stack fa-4x">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-bar-chart fa-stack-1x text-primary"></i>
+                           </span>
+                               <h4>
+                                   <strong>Dashboard</strong>
+                               </h4>
+                               <p>Alle Fahrten übersichtlich in einem Dashboard.</p>
+                           </div>
+                       </div>
+                       <div class="col-md-3 col-sm-6">
+                           <div class="service-item">
+                               <span class="fa-stack fa-4x">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-compass fa-stack-1x text-primary"></i>
+                           </span>
+                               <h4>
+                                   <strong>Zielgenau</strong>
+                               </h4>
+                               <p>Google Maps Anbindung daher zielgenaue Distanzen.</p>
+                           </div>
+                       </div>
+                       <div class="col-md-3 col-sm-6">
+                           <div class="service-item">
+                               <span class="fa-stack fa-4x">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-television fa-stack-1x text-primary"></i>
+                           </span>
+                               <h4>
+                                   <strong>Web App</strong>
+                               </h4>
+                               <p>Für jedes Gerät nutzbar dank Web Zugang.</p>
+                           </div>
+                       </div>
+                       <div class="col-md-3 col-sm-6">
+                           <div class="service-item">
+                               <span class="fa-stack fa-4x">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-file-excel-o fa-stack-1x text-primary"></i>
+                           </span>
+                               <h4>
+                                   <strong>Reports</strong>
+                               </h4>
+                               <p>Individueller csv oder xlsx Report.</p>
+                           </div>
+                       </div>
+                   </div>
+                   <!-- /.row (nested) -->
+               </div>
+               <!-- /.col-lg-10 -->
+           </div>
+           <!-- /.row -->
+       </div>
+       <!-- /.container -->
+   </section>
+
+   <!-- Callout -->
+   <aside class="callout">
+       <div class="text-vertical-center">
+           <h1>Dashboard</h1>
+       </div>
+   </aside>
+   <aside class="call-to-action bg-primary">
+       <div class="container">
+           <div class="row">
+               <div class="col-lg-12 text-center">
+                   <h3>Warum zögern. Jetzt anmelden und loslegen</h3>
+                   <%= link_to "Jetzt Starten!", signup_path, class: "btn btn-lg btn-light" %>
+                   <%= link_to "bereits angemeldet?", login_path, class: "btn btn-lg btn-dark" %>
+               </div>
+           </div>
+       </div>
+   </aside>
+
+   <!-- Map -->
+   <section id="contact" class="map">
+       <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.de/maps?hl=de&q=Bruderm%C3%BChlstr.,%20M%C3%BCnchen&t=&z=12&ie=UTF8&iwloc=B&output=embed"></iframe>
+       <br />
+</section>

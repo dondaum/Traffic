@@ -19,6 +19,8 @@ gem 'highcharts-rails'
 gem 'gmaps4rails'
 # Get underscore_js
 gem 'underscore-rails'
+# font-awesome-rails web fonts
+gem "font-awesome-rails"
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
