@@ -15,11 +15,9 @@
 //= require bootstrap
 //= require underscore
 //= require gmaps/google
-//= require turbolinks
-//= require bootstrap-sprockets
-//= require_tree.
-
 //= require highcharts/highcharts
 //= require highcharts/highcharts-more
 //= require highcharts/highstock
-//= require highcharts/modules/funnel
+//= require turbolinks
+//= require bootstrap-sprockets
+//= require_tree.
