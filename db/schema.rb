@@ -10,21 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170216101922) do
+ActiveRecord::Schema.define(version: 20170218164536) do
 
   create_table "distances", force: :cascade do |t|
     t.string   "startpunkt"
     t.string   "zielpunkt"
     t.string   "verkehrsmittel"
     t.integer  "user_id"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.float    "latitude"
     t.float    "longitude"
     t.float    "destination_lat"
     t.float    "destination_long"
-    t.decimal  "range",            precision: 2
-    t.decimal  "gmaprange",        precision: 2
+    t.decimal  "range",            precision: 10
+    t.decimal  "gmaprange",        precision: 10
     t.index ["user_id", "created_at"], name: "index_distances_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_distances_on_user_id"
   end
