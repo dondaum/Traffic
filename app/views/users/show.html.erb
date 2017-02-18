@@ -17,11 +17,16 @@
 <div class="container-fluid">
   <div class="row">
     <% if current_user.distances.any? %>
-      <%= high_chart("some_id5", @chart5) %> 
+      <%= high_chart("some_id5", @chart5) %>
       <%= high_chart("some_id4", @chart4) %>
       <%= high_chart("some_id", @chart) %>
-    <% else  %> <h3> Sie haben noch keine Fahrt gespeichert. Gehen Sie im Menü
-      auf Eintrag erfassen um eine neue Fahrt zu speichern. </h3>
+    <% else  %>
+
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        Sie haben noch keine Fahrt gespeichert. Gehen Sie im Menü
+          auf Eintrag erfassen um eine neue Fahrt zu speichern
+    </div>
     <% end %>
     </div>
   </div>
