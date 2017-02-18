@@ -17,15 +17,9 @@
 <div class="container-fluid">
   <div class="row">
     <% if current_user.distances.any? %>
-      <%= high_chart("some_id", @chart) %>
+      <%= high_chart("some_id5", @chart5) %> 
       <%= high_chart("some_id4", @chart4) %>
-      <%= high_chart("some_id5", @chart5) %>
-      <%= high_chart("some_id6", @chart6) %>
-      <%= high_chart("some_id7", @chart7) %>
-      <%= @distances.map{ |f| [f.created_at.utc, f.gmaprange.to_f]}.inspect %>
-      <%= @distances.select{ |f| [f.gmaprange || 0.0]}.map(&:gmaprange) %>
-      <%= @var2 %>
-      <%= @distances.map{ |f| [f.created_at.utc.strftime("%F %X"+" UTC"), f.gmaprange.to_f]}.inspect %>
+      <%= high_chart("some_id", @chart) %>
     <% else  %> <h3> Sie haben noch keine Fahrt gespeichert. Gehen Sie im Menü
       auf Eintrag erfassen um eine neue Fahrt zu speichern. </h3>
     <% end %>

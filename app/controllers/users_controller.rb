@@ -64,49 +64,15 @@ before_action :current_user, only: [:show]
        )
 
       f.series(:name => "Kilomenter",
-              :data => @distances.map{ |f| [f.created_at.utc.strftime("%F %X"+" UTC"), f.gmaprange.to_f]}.inspect
+              :data => @distances.map{ |f| [f.created_at.utc.strftime("%F %X"+" UTC"), f.gmaprange.to_f]}
       )
 
       f.yAxis [
-        {:title => {:text => "Kilometer", :margin => 70} },
-        {:title => {:text => "Kilometer"}, :opposite => true},
+        {:title => {:text => "Kilometer", :margin => 10} }
       ]
 
       f.legend(:align => 'right', :verticalAlign => 'top', :y => 75, :x => -50, :layout => 'vertical',)
       f.chart({:defaultSeriesType=>"line"})
-    end
-
-    @chart6 = LazyHighCharts::HighChart.new('graph') do |f|
-      f.title(:text => "Fahrten im Zeitverlauf")
-      f.xAxis(
-        type: 'datetime',
-        categories: giv_me_date,
-        dateTimeLabelFormats: {second: '%l:%M:%S %p',
-                           minute: '%l:%M %p',
-                           hour: '%l:%M %p',
-                           day: '%e. %b', week: '%e. %b',
-                           month: '%b \'%y', year: '%Y'}
-       )
-
-      f.series(:name => "Kilomenter", :yAxis => 0, :data => [
-        ["2017-01-15 11:01:16 UTC", 222], ["2017-01-20 11:01:16 UTC", 100], ["2017-01-30 11:01:16 UTC", 500]
-        ])
-
-      f.yAxis [
-        {:title => {:text => "Kilometer", :margin => 70} },
-        {:title => {:text => "Kilometer"}, :opposite => true},
-      ]
-
-      f.legend(:align => 'right', :verticalAlign => 'top', :y => 75, :x => -50, :layout => 'vertical',)
-      f.chart({:defaultSeriesType=>"line"})
-    end
-
-    @chart7 = LazyHighCharts::HighChart.new('column') do |f|
-       f.series(:name=>'John',:data=> [3, 20, 3, 5, 4, 10, 12 ])
-       f.series(:name=>'Jane',:data=>[1, 3, 4, 3, 3, 5, 4,-46] )
-       f.title({ :text=>"example test title from controller"})
-       f.options[:chart][:defaultSeriesType] = "column"
-       f.plot_options({:column=>{:stacking=>"percent"}})
     end
   end
 
@@ -123,8 +89,7 @@ before_action :current_user, only: [:show]
 
 
   def data_new
-     var1 = distances.map{ |f| [f.gmaprange]}.inspect
-     @var2 = var1.compact
+    @distances.map{ |f| [f.created_at.utc.strftime("%F %X"+" UTC"), f.gmaprange.to_f]}.inspect
   end
 
    def init()
