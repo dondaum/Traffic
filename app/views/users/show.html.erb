@@ -6,6 +6,14 @@
         <!-- /.col-lg-12 -->
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-1 main">
+      <% if current_user.distances.any? %>
+        <% else  %>
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            Sie haben noch keine Fahrt gespeichert. Gehen Sie im Menü
+              auf Eintrag erfassen um eine neue Fahrt zu speichern
+        </div>
+        <% end %>
       <div class="card">
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Gesamt Anzahl Fahrten: <%= @user.distances.count %></li>
@@ -20,13 +28,6 @@
       <%= high_chart("some_id5", @chart5) %>
       <%= high_chart("some_id4", @chart4) %>
       <%= high_chart("some_id", @chart) %>
-    <% else  %>
-
-    <div class="alert alert-warning alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        Sie haben noch keine Fahrt gespeichert. Gehen Sie im Menü
-          auf Eintrag erfassen um eine neue Fahrt zu speichern
     </div>
     <% end %>
-    </div>
   </div>
