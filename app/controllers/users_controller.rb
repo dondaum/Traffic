@@ -77,7 +77,7 @@ before_action :current_user, only: [:show]
     @chart6 = LazyHighCharts::HighChart.new('graph') do |f|
       f.title(:text => "Zurückgelegte Kilometer nach Verkehrsmittel I")
       f.xAxis(
-        type: 'datetime',
+        type: 'linear',
         categories: ["Auto", "öffentlicher Verkehr", "Fahrrad", "Zu Fuss"]
        )
 
@@ -100,7 +100,6 @@ before_action :current_user, only: [:show]
     @chart7 = LazyHighCharts::HighChart.new('graph') do |f|
       f.title(:text => "Zurückgelegte Kilometer nach Verkehrsmittel II")
       f.xAxis(
-        type: 'datetime',
         categories: ["Auto", "öffentlicher Verkehr", "Fahrrad", "Zu Fuss"]
        )
 
