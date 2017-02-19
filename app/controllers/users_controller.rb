@@ -63,7 +63,7 @@ before_action :current_user, only: [:show]
         categories: giv_me_date
        )
 
-      f.series(:name => "Kilomenter",
+      f.series(:name => "Kilometer",
               :data => @distances.map{ |f| [f.created_at.utc.strftime("%F %X"+" UTC"), f.gmaprange.to_f]}
       )
 
@@ -71,8 +71,53 @@ before_action :current_user, only: [:show]
         {:title => {:text => "Kilometer", :margin => 10} }
       ]
 
-      f.legend(:align => 'right', :verticalAlign => 'top', :y => 75, :x => -50, :layout => 'vertical',)
       f.chart({:defaultSeriesType=>"line"})
+    end
+
+    @chart6 = LazyHighCharts::HighChart.new('graph') do |f|
+      f.title(:text => "Zurückgelegte Kilometer nach Verkehrsmittel I")
+      f.xAxis(
+        type: 'datetime',
+        categories: ["Auto", "öffentlicher Verkehr", "Fahrrad", "Zu Fuss"]
+       )
+
+      f.series(:name => ["Auto", "öffentlicher Verkehr", "Fahrrad", "Zu Fuss"],
+              :data => [
+                ['Auto', Distance.where(verkehrsmittel: "DRIVING", user_id: current_user).sum(:gmaprange)],
+                ['öffentliche Verkehrsmittel', Distance.where(verkehrsmittel: "TRANSIT", user_id: current_user).sum(:gmaprange)],
+                ['Fahrrad', Distance.where(verkehrsmittel: "BICYCLING", user_id: current_user).sum(:gmaprange)],
+                ['Zu fuss', Distance.where(verkehrsmittel: "WALKING", user_id: current_user).sum(:gmaprange)]
+              ]
+      )
+
+      f.yAxis [
+        {:title => {:text => "Kilometer", :margin => 10} }
+      ]
+
+      f.chart({:defaultSeriesType=>"spline"})
+    end
+
+    @chart7 = LazyHighCharts::HighChart.new('graph') do |f|
+      f.title(:text => "Zurückgelegte Kilometer nach Verkehrsmittel II")
+      f.xAxis(
+        type: 'datetime',
+        categories: ["Auto", "öffentlicher Verkehr", "Fahrrad", "Zu Fuss"]
+       )
+
+      f.series(:name => ["Auto", "öffentlicher Verkehr", "Fahrrad", "Zu Fuss"],
+              :data => [
+                ['Auto', Distance.where(verkehrsmittel: "DRIVING", user_id: current_user).sum(:gmaprange)],
+                ['öffentliche Verkehrsmittel', Distance.where(verkehrsmittel: "TRANSIT", user_id: current_user).sum(:gmaprange)],
+                ['Fahrrad', Distance.where(verkehrsmittel: "BICYCLING", user_id: current_user).sum(:gmaprange)],
+                ['Zu fuss', Distance.where(verkehrsmittel: "WALKING", user_id: current_user).sum(:gmaprange)]
+              ]
+      )
+
+      f.yAxis [
+        {:title => {:text => "Kilometer", :margin => 10} }
+      ]
+
+      f.chart({:defaultSeriesType=>"bar"})
     end
   end
 
