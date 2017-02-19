@@ -94,7 +94,7 @@ before_action :current_user, only: [:show]
         {:title => {:text => "Kilometer", :margin => 10} }
       ]
 
-      f.chart({:defaultSeriesType=>"spline"})
+      f.chart({:defaultSeriesType=>"line"})
     end
 
     @chart7 = LazyHighCharts::HighChart.new('graph') do |f|
@@ -117,7 +117,7 @@ before_action :current_user, only: [:show]
         {:title => {:text => "Kilometer", :margin => 10} }
       ]
 
-      f.chart({:defaultSeriesType=>"bar"})
+      f.chart({:defaultSeriesType=>"line"})
     end
   end
 
