@@ -41,5 +41,5 @@
     </div>
     <% end %>
   </div>
-  <%= @distances.map{ |f| [f.verkehrsmittel, f.gmaprange.to_f]} %>
-  <%= @distances.group_by{ |verkehrsmittel| :gmaprange} %>
+  <<!--<%= @distances.map{ |f| [f.verkehrsmittel, f.gmaprange.to_f]} %> -->
+  <%= @user.distances.group_by{ |f| f[:verkehrsmittel]} %>

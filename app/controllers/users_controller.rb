@@ -83,10 +83,10 @@ before_action :current_user, only: [:show]
 
       f.series(:name => ["Auto", "öffentlicher Verkehr", "Fahrrad", "Zu Fuss"],
               :data => [
-                ['Auto', Distance.where(verkehrsmittel: "DRIVING", user_id: current_user).sum(:gmaprange)],
-                ['öffentliche Verkehrsmittel', 300],
-                ['Fahrrad', 200],
-                ['Zu fuss', 100]
+                ['Auto', data_helper_auto],
+                ['öffentliche Verkehrsmittel', data_helper_transit],
+                ['Fahrrad', data_helper_bicycling],
+                ['Zu fuss', data_helper_walking]
               ]
       )
 
@@ -105,7 +105,7 @@ before_action :current_user, only: [:show]
 
       f.series(:name => ["Auto", "öffentlicher Verkehr", "Fahrrad", "Zu Fuss"],
               :data => [
-                ['Auto', Distance.where(verkehrsmittel: "DRIVING", user_id: current_user).sum(:gmaprange)],
+                ['Auto', data_helper_auto],
                 ['öffentliche Verkehrsmittel', Distance.where(verkehrsmittel: "TRANSIT", user_id: current_user).sum(:gmaprange)],
                 ['Fahrrad', Distance.where(verkehrsmittel: "BICYCLING", user_id: current_user).sum(:gmaprange)],
                 ['Zu fuss', Distance.where(verkehrsmittel: "WALKING", user_id: current_user).sum(:gmaprange)]
@@ -136,9 +136,22 @@ before_action :current_user, only: [:show]
     @distances.map{ |f| [f.created_at.utc.strftime("%F %X"+" UTC"), f.gmaprange.to_f]}.inspect
   end
 
-  def data_helper
-    user_totals = gmaprange.to_a.group_by(&:u).map{ |user_id,jobs| {:user_id => user_id.to_i, :total => jobs.sum {|j| j.total.to_f} }}
+  def data_helper_auto
+    Distance.where(verkehrsmittel: "DRIVING", user_id: current_user).sum(:gmaprange)
   end
+
+  def data_helper_transit
+    Distance.where(verkehrsmittel: "TRANSIT", user_id: current_user).sum(:gmaprange)
+  end
+
+  def data_helper_bicycling
+    Distance.where(verkehrsmittel: "BICYCLING", user_id: current_user).sum(:gmaprange)
+  end
+
+  def data_helper_walking
+    Distance.where(verkehrsmittel: "WALKING", user_id: current_user).sum(:gmaprange)
+  end
+
 
    def init()
    mess = []
