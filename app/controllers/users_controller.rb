@@ -83,7 +83,7 @@ before_action :current_user, only: [:show]
 
       f.series(:name => ["Auto", "öffentlicher Verkehr", "Fahrrad", "Zu Fuss"],
               :data => [
-                ['Auto', 500],
+                ['Auto', Distance.where(verkehrsmittel: "DRIVING", user_id: current_user).sum(:gmaprange)],
                 ['öffentliche Verkehrsmittel', 300],
                 ['Fahrrad', 200],
                 ['Zu fuss', 100]
@@ -134,6 +134,10 @@ before_action :current_user, only: [:show]
 
   def data_new
     @distances.map{ |f| [f.created_at.utc.strftime("%F %X"+" UTC"), f.gmaprange.to_f]}.inspect
+  end
+
+  def data_helper
+    user_totals = gmaprange.to_a.group_by(&:u).map{ |user_id,jobs| {:user_id => user_id.to_i, :total => jobs.sum {|j| j.total.to_f} }}
   end
 
    def init()
