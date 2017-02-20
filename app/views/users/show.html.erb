@@ -46,6 +46,4 @@
 <%= @distances.map{ |f| [f.verkehrsmittel, f.gmaprange.to_f]} %>
 <%= @distances.map{ |f| [f.verkehrsmittel, f.gmaprange.to_f]} %> -->
 <%= @distances.group(:verkehrsmittel).sum(:gmaprange).to_a %>
-<%= Distance.select("distances.verkehrsmittel, SUM(gmaprange)")
-               .where("distances.user_id = current_user", "distances.verkehrsmittel_id = DRIVING")
-               .group("distances.verkehrsmittel")  %>
+<% @distances.to_a.group_by(&:verkehrsmittel).map{ |verkehrsmittel,distances| {:verkehrsmittel => verkehrsmittel.to_i, :gmaprange => distances.sum {|j| j.gmaprange.to_f} }} %>

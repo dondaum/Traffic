@@ -32,12 +32,7 @@ before_action :current_user, only: [:show]
       series = {
         :type=> 'pie',
         :name=> 'Verkehrsmittel Verteilung',
-        :data=> [
-          ['Auto', Distance.where(verkehrsmittel: "DRIVING", user_id: current_user).sum(:gmaprange)],
-          ['öffentliche Verkehrsmittel', Distance.where(verkehrsmittel: "TRANSIT", user_id: current_user).sum(:gmaprange)],
-          ['Fahrrad', Distance.where(verkehrsmittel: "BICYCLING", user_id: current_user).sum(:gmaprange)],
-          ['Zu fuss', Distance.where(verkehrsmittel: "WALKING", user_id: current_user).sum(:gmaprange)]
-        ]
+        :data=> @distances.to_a.group_by(&:verkehrsmittel).map{ |verkehrsmittel,distances| {:verkehrsmittel => verkehrsmittel.to_i, :gmaprange => distances.sum {|j| j.gmaprange.to_f} }}
       }
       f.series(series)
       f.options[:title][:text] = "Prozentuelle Verteilung"
@@ -82,9 +77,7 @@ before_action :current_user, only: [:show]
 
       f.series(:name => ["Auto", "öffentlicher Verkehr", "Fahrrad", "Zu Fuss"],
               :data => [
-                ['Auto', Distance.select("distances.verkehrsmittel, SUM(gmaprange)")
-                               .where("distances.user_id = current_user", "distances.verkehrsmittel_id = DRIVING")
-                               .group("distances.verkehrsmittel") ],
+                ['Auto', 500],
                 ['öffentliche Verkehrsmittel', 300],
                 ['Fahrrad', 200],
                 ['Zu fuss', 100]
