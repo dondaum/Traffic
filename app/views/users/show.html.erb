@@ -45,3 +45,6 @@
 <%= @distances.map{ |f| [f.verkehrsmittel, f.gmaprange.to_f]} %>
 <%= @distances.map{ |f| [f.verkehrsmittel, f.gmaprange.to_f]} %> -->
 <%= @distances.map{ |f| [f.verkehrsmittel, f.gmaprange.to_f]} %>
+<%= @distances.map{ |f| [f.verkehrsmittel.to_s, f.gmaprange.to_f]} %>
+<%= @distances.inject({}) { |h, f| h[f.verkehrsmittel.to_sym] = f.gmaprange; h } %>
+<%= @test20 %>

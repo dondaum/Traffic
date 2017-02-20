@@ -9,6 +9,7 @@ before_action :current_user, only: [:show]
     @user = User.find(params[:id])
     @distances  = @user.distances
 
+    @test16 = Distance.where(verkehrsmittel: "DRIVING", user_id: current_user).sum(:gmaprange)
 
 
 
@@ -83,7 +84,12 @@ before_action :current_user, only: [:show]
        )
 
       f.series(:name => ["Auto", "öffentlicher Verkehr", "Fahrrad", "Zu Fuss"],
-              :data => @distances.map{ |f| [f.verkehrsmittel, f.gmaprange.to_f]}
+              :data => [
+                ['Auto', @test16],
+                ['öffentliche Verkehrsmittel', @test16],
+                ['Fahrrad', @test16],
+                ['Zu fuss', @test16]
+              ]
       )
 
       f.yAxis [
@@ -130,6 +136,10 @@ before_action :current_user, only: [:show]
 
   def data_new
     @distances.map{ |f| [f.created_at.utc.strftime("%F %X"+" UTC"), f.gmaprange.to_f]}.inspect
+  end
+
+  def data_helper
+    @test16 = Distance.where(verkehrsmittel: "DRIVING", user_id: current_user).sum(:gmaprange)
   end
 
 
