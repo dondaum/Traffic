@@ -81,7 +81,14 @@ before_action :current_user, only: [:show]
        )
 
       f.series(:name => ["Auto", "öffentlicher Verkehr", "Fahrrad", "Zu Fuss"],
-              :data => @distances.group(:verkehrsmittel).sum(:gmaprange).to_a
+              :data => [
+                ['Auto', Distance.select("distances.verkehrsmittel, SUM(gmaprange)")
+                               .where("distances.user_id = current_user", "distances.verkehrsmittel_id = DRIVING")
+                               .group("distances.verkehrsmittel") ],
+                ['öffentliche Verkehrsmittel', 300],
+                ['Fahrrad', 200],
+                ['Zu fuss', 100]
+              ]
       )
 
       f.yAxis [
