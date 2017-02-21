@@ -10,6 +10,8 @@ before_action :current_user, only: [:show]
     @distances  = @user.distances
 
 
+
+
     @chart1 = LazyHighCharts::HighChart.new('graph') do |f|
       f.title(text: "Zurückgelegte Kilometer nach Verkehrsmittel")
       f.xAxis(categories:  ["Auto", "öffentlicher Verkehr", "Fahrrad", "Zu Fuss"])
@@ -32,12 +34,7 @@ before_action :current_user, only: [:show]
       series = {
         :type=> 'pie',
         :name=> 'Verkehrsmittel Verteilung',
-        :data=> [
-            Distance.where(verkehrsmittel: "DRIVING", user_id: current_user).sum(:gmaprange),
-            Distance.where(verkehrsmittel: "TRANSIT", user_id: current_user).sum(:gmaprange),
-            Distance.where(verkehrsmittel: "BICYCLING", user_id: current_user).sum(:gmaprange),
-            Distance.where(verkehrsmittel: "WALKING", user_id: current_user).sum(:gmaprange)
-          ]
+        :data=> data_hope
       }
       f.series(series)
       f.options[:title][:text] = "Prozentuelle Verteilung"
@@ -81,41 +78,14 @@ before_action :current_user, only: [:show]
        )
 
       f.series(:name => ["Auto", "öffentlicher Verkehr", "Fahrrad", "Zu Fuss"],
-              :data => [
-                ['Auto', 500],
-                ['öffentliche Verkehrsmittel', 300],
-                ['Fahrrad', 200],
-                ['Zu fuss', 100]
-              ]
+              :data => data_hope
       )
 
       f.yAxis [
         {:title => {:text => "Kilometer", :margin => 10} }
       ]
 
-      f.chart({:defaultSeriesType=>"line"})
-    end
-
-    @chart7 = LazyHighCharts::HighChart.new('graph') do |f|
-      f.title(:text => "Zurückgelegte Kilometer nach Verkehrsmittel II")
-      f.xAxis(
-        categories: ["Auto", "öffentlicher Verkehr", "Fahrrad", "Zu Fuss"]
-       )
-
-      f.series(:name => ["Auto", "öffentlicher Verkehr", "Fahrrad", "Zu Fuss"],
-              :data => [
-                ['Auto', Distance.where(verkehrsmittel: "DRIVING", user_id: current_user).sum(:gmaprange)],
-                ['öffentliche Verkehrsmittel', Distance.where(verkehrsmittel: "TRANSIT", user_id: current_user).sum(:gmaprange)],
-                ['Fahrrad', Distance.where(verkehrsmittel: "BICYCLING", user_id: current_user).sum(:gmaprange)],
-                ['Zu fuss', Distance.where(verkehrsmittel: "WALKING", user_id: current_user).sum(:gmaprange)]
-              ]
-      )
-
-      f.yAxis [
-        {:title => {:text => "Kilometer", :margin => 10} }
-      ]
-
-      f.chart({:defaultSeriesType=>"line"})
+      f.chart({:defaultSeriesType=>"bar"})
     end
   end
 
@@ -136,8 +106,8 @@ before_action :current_user, only: [:show]
   end
 
   def data_hope
-    pm = Distance.where(verkehrsmittel: "DRIVING", user_id: current_user).sum(:gmaprange)
-
+    pm = @distances1 = @distances.group(:verkehrsmittel).sum(:gmaprange)
+    pv = pm.to_a
   end
 
 
