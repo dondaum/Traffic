@@ -32,7 +32,12 @@ before_action :current_user, only: [:show]
       series = {
         :type=> 'pie',
         :name=> 'Verkehrsmittel Verteilung',
-        :data=> @distances.to_a.group_by(&:verkehrsmittel).map{ |verkehrsmittel,distances| {:verkehrsmittel => verkehrsmittel.to_i, :gmaprange => distances.sum {|j| j.gmaprange.to_f} }}
+        :data=> [
+            Distance.where(verkehrsmittel: "DRIVING", user_id: current_user).sum(:gmaprange),
+            Distance.where(verkehrsmittel: "TRANSIT", user_id: current_user).sum(:gmaprange),
+            Distance.where(verkehrsmittel: "BICYCLING", user_id: current_user).sum(:gmaprange),
+            Distance.where(verkehrsmittel: "WALKING", user_id: current_user).sum(:gmaprange)
+          ]
       }
       f.series(series)
       f.options[:title][:text] = "Prozentuelle Verteilung"
@@ -129,6 +134,12 @@ before_action :current_user, only: [:show]
   def data_new
     @distances.map{ |f| [f.created_at.utc.strftime("%F %X"+" UTC"), f.gmaprange.to_f]}.inspect
   end
+
+  def data_hope
+    pm = Distance.where(verkehrsmittel: "DRIVING", user_id: current_user).sum(:gmaprange)
+
+  end
+
 
 
    def init()
