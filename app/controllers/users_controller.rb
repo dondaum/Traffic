@@ -32,12 +32,7 @@ before_action :current_user, only: [:show]
       series = {
         :type=> 'pie',
         :name=> 'Verkehrsmittel Verteilung',
-        :data=> [
-            Distance.where(verkehrsmittel: "DRIVING", user_id: current_user).sum(:gmaprange),
-            Distance.where(verkehrsmittel: "TRANSIT", user_id: current_user).sum(:gmaprange),
-            Distance.where(verkehrsmittel: "BICYCLING", user_id: current_user).sum(:gmaprange),
-            Distance.where(verkehrsmittel: "WALKING", user_id: current_user).sum(:gmaprange)
-          ]
+        :data=> data_dream
       }
       f.series(series)
       f.options[:title][:text] = "Prozentuelle Verteilung"
@@ -115,8 +110,11 @@ before_action :current_user, only: [:show]
   end
 
   def data_dream
-    hm = @distances.map{ |f| [f.verkehrsmittel, f.gmaprange.to_f]}
-    hv = hm.group_by{|d| d["verkehrsmittel"]}
+    a1 = Distance.where(verkehrsmittel: "DRIVING", user_id: current_user).sum(:gmaprange),
+    a2 = Distance.where(verkehrsmittel: "TRANSIT", user_id: current_user).sum(:gmaprange),
+    a3 = Distance.where(verkehrsmittel: "BICYCLING", user_id: current_user).sum(:gmaprange),
+    a4 = Distance.where(verkehrsmittel: "WALKING", user_id: current_user).sum(:gmaprange)
+    arr = [a1, a2, a3, a4]
   end
 
   def self.ytd

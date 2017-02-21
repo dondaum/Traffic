@@ -20,7 +20,6 @@
           <li class="list-group-item">Zurückgelegte Kilometer nach Luftlinie: <%= @distances.sum(:range).round %> km</li>
           <li class="list-group-item">Zurückgelegte Kilometer: <%= @distances.sum(:gmaprange).round %> km</li>
             <%= @distances.sum(:gmaprange).round %>
-            <%= @distances.group(:verkehrsmittel).sum(:gmaprange) %>
         </ul>
       </div>
     </div>
