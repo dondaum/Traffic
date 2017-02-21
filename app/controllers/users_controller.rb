@@ -10,8 +10,6 @@ before_action :current_user, only: [:show]
     @distances  = @user.distances
 
 
-
-
     @chart1 = LazyHighCharts::HighChart.new('graph') do |f|
       f.title(text: "Zurückgelegte Kilometer nach Verkehrsmittel")
       f.xAxis(categories:  ["Auto", "öffentlicher Verkehr", "Fahrrad", "Zu Fuss"])
@@ -100,10 +98,6 @@ before_action :current_user, only: [:show]
       end
   end
 
-
-  def data_new
-    @distances.map{ |f| [f.created_at.utc.strftime("%F %X"+" UTC"), f.gmaprange.to_f]}.inspect
-  end
 
   def data_hope
     pm = @distances1 = @distances.group(:verkehrsmittel).sum(:gmaprange)
