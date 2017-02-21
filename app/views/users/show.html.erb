@@ -20,7 +20,7 @@
           <li class="list-group-item">Zurückgelegte Kilometer nach Luftlinie: <%= @distances.sum(:range).round %> km</li>
           <li class="list-group-item">Zurückgelegte Kilometer: <%= @distances.sum(:gmaprange).round %> km</li>
             <%= @distances.sum(:gmaprange).round %>
-            <%= @distances.group(:verkehrsmittel).sum(:gmaprange) %>
+  
         </ul>
       </div>
     </div>
@@ -34,9 +34,3 @@
   <div class="row">
         <%= high_chart("some_id6", @chart6) %>
   </div>
-  <!--<%= @distances.map{ |f| [f.verkehrsmittel, f.gmaprange.to_f]} %>
-<%= @distances.map{ |f| [f.verkehrsmittel, f.gmaprange.to_f]} %>
-<%= @distances.map{ |f| [f.verkehrsmittel, f.gmaprange.to_f]} %>
-<%= @distances.map{ |f| [f.verkehrsmittel, f.gmaprange.to_f]} %>
-<% @distances.to_a.group_by(&:verkehrsmittel).map{ |verkehrsmittel,distances| {:verkehrsmittel => verkehrsmittel.to_i, :gmaprange => distances.sum {|j| j.gmaprange.to_f} }} %>
--->

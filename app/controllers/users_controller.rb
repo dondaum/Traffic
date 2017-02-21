@@ -32,7 +32,7 @@ before_action :current_user, only: [:show]
       series = {
         :type=> 'pie',
         :name=> 'Verkehrsmittel Verteilung',
-        :data=> data_hope
+        :data=> ytd
       }
       f.series(series)
       f.options[:title][:text] = "Prozentuelle Verteilung"
@@ -76,7 +76,7 @@ before_action :current_user, only: [:show]
        )
 
       f.series(:name => ["Auto", "öffentlicher Verkehr", "Fahrrad", "Zu Fuss"],
-              :data => data_hope
+              :data => ytd
       )
 
       f.yAxis [
@@ -104,6 +104,15 @@ before_action :current_user, only: [:show]
     pv = pm.to_a
   end
 
+  def data_dream
+    hm = @distances.map{ |f| [f.verkehrsmittel, f.gmaprange.to_f]}
+    hv = hm.group_by{|d| d["verkehrsmittel"]}
+  end
+
+  def ytd
+    Distance.select("distances.verkehrsmittel", "SUM(gmaprange) as sum_amount").
+    group("distances.verkehrsmittel")
+  end
 
 
    def init()
