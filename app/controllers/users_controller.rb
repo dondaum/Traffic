@@ -32,7 +32,12 @@ before_action :current_user, only: [:show]
       series = {
         :type=> 'pie',
         :name=> 'Verkehrsmittel Verteilung',
-        :data=> ytd
+        :data=> [
+            Distance.where(verkehrsmittel: "DRIVING", user_id: current_user).sum(:gmaprange),
+            Distance.where(verkehrsmittel: "TRANSIT", user_id: current_user).sum(:gmaprange),
+            Distance.where(verkehrsmittel: "BICYCLING", user_id: current_user).sum(:gmaprange),
+            Distance.where(verkehrsmittel: "WALKING", user_id: current_user).sum(:gmaprange)
+          ]
       }
       f.series(series)
       f.options[:title][:text] = "Prozentuelle Verteilung"
@@ -76,7 +81,12 @@ before_action :current_user, only: [:show]
        )
 
       f.series(:name => ["Auto", "öffentlicher Verkehr", "Fahrrad", "Zu Fuss"],
-              :data => ytd
+              :data => [
+                  Distance.where(verkehrsmittel: "DRIVING", user_id: current_user).sum(:gmaprange),
+                  Distance.where(verkehrsmittel: "TRANSIT", user_id: current_user).sum(:gmaprange),
+                  Distance.where(verkehrsmittel: "BICYCLING", user_id: current_user).sum(:gmaprange),
+                  Distance.where(verkehrsmittel: "WALKING", user_id: current_user).sum(:gmaprange)
+                ]
       )
 
       f.yAxis [
@@ -109,7 +119,7 @@ before_action :current_user, only: [:show]
     hv = hm.group_by{|d| d["verkehrsmittel"]}
   end
 
-  def ytd
+  def self.ytd
     Distance.select("distances.verkehrsmittel", "SUM(gmaprange) as sum_amount").
     group("distances.verkehrsmittel")
   end
