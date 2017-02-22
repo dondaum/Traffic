@@ -69,7 +69,7 @@ before_action :current_user, only: [:show]
     end
 
     @chart6 = LazyHighCharts::HighChart.new('graph') do |f|
-      f.title(:text => "Zurückgelegte Kilometer nach Verkehrsmittel I")
+      f.title(:text => "Zurückgelegte Kilometer nach Verkehrsmittel")
       f.xAxis(
         type: 'linear',
         categories: ["Auto", "öffentlicher Verkehr", "Fahrrad", "Zu Fuss"]
@@ -109,7 +109,7 @@ before_action :current_user, only: [:show]
     a2 = Distance.where(verkehrsmittel: "TRANSIT", user_id: current_user).sum(:gmaprange)
     a3 = Distance.where(verkehrsmittel: "BICYCLING", user_id: current_user).sum(:gmaprange)
     a4 = Distance.where(verkehrsmittel: "WALKING", user_id: current_user).sum(:gmaprange)
-    arr = [a1.to_f, a2.to_f, a3.to_f, a4.to_f]
+    arr = [["DRIVING",a1.to_f], ["TRANSIT", a2.to_f], ["BICYCLING",a3.to_f], ["WALKING",a4.to_f]]
     kuck = arr.to_a
   end
 
