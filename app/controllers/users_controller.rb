@@ -13,13 +13,18 @@ before_action :current_user, only: [:show]
     @chart1 = LazyHighCharts::HighChart.new('graph') do |f|
       f.title(text: "Zurückgelegte Kilometer nach Verkehrsmittel")
       f.xAxis(categories:  ["Auto", "öffentlicher Verkehr", "Fahrrad", "Zu Fuss"])
-      f.series(name: "Kilomenter", yAxis: 0, data: data_dream
+      f.series(name: "Kilomenter", yAxis: 0, data: [
+          Distance.where(verkehrsmittel: "DRIVING", user_id: current_user).sum(:gmaprange),
+          Distance.where(verkehrsmittel: "TRANSIT", user_id: current_user).sum(:gmaprange),
+          Distance.where(verkehrsmittel: "BICYCLING", user_id: current_user).sum(:gmaprange),
+          Distance.where(verkehrsmittel: "WALKING", user_id: current_user).sum(:gmaprange)
+        ]
        )
 
       f.yAxis [
         {title: {text: "Kilomenter", margin: 10} },
       ]
-      f.chart({defaultSeriesType: "line"})
+      f.chart({defaultSeriesType: "column"})
     end
 
     @chart4 = LazyHighCharts::HighChart.new('pie') do |f|
@@ -104,7 +109,7 @@ before_action :current_user, only: [:show]
     a2 = Distance.where(verkehrsmittel: "TRANSIT", user_id: current_user).sum(:gmaprange)
     a3 = Distance.where(verkehrsmittel: "BICYCLING", user_id: current_user).sum(:gmaprange)
     a4 = Distance.where(verkehrsmittel: "WALKING", user_id: current_user).sum(:gmaprange)
-    arr = [a1, a2, a3, a4]
+    arr = [a1.to_f, a2.to_f, a3.to_f, a4.to_f]
     kuck = arr.to_a
   end
 
