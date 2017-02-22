@@ -76,12 +76,7 @@ before_action :current_user, only: [:show]
        )
 
       f.series(:name => ["Auto", "öffentlicher Verkehr", "Fahrrad", "Zu Fuss"],
-              :data => [
-                  Distance.where(verkehrsmittel: "DRIVING", user_id: current_user).sum(:gmaprange),
-                  Distance.where(verkehrsmittel: "TRANSIT", user_id: current_user).sum(:gmaprange),
-                  Distance.where(verkehrsmittel: "BICYCLING", user_id: current_user).sum(:gmaprange),
-                  Distance.where(verkehrsmittel: "WALKING", user_id: current_user).sum(:gmaprange)
-                ]
+              :data => data_dream
       )
 
       f.yAxis [
@@ -115,6 +110,7 @@ before_action :current_user, only: [:show]
     a3 = Distance.where(verkehrsmittel: "BICYCLING", user_id: current_user).sum(:gmaprange)
     a4 = Distance.where(verkehrsmittel: "WALKING", user_id: current_user).sum(:gmaprange)
     arr = [a1, a2, a3, a4]
+    kuck = arr.to_a
   end
 
   def self.ytd
