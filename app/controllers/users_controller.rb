@@ -110,9 +110,9 @@ before_action :current_user, only: [:show]
   end
 
   def data_dream
-    a1 = Distance.where(verkehrsmittel: "DRIVING", user_id: current_user).sum(:gmaprange),
-    a2 = Distance.where(verkehrsmittel: "TRANSIT", user_id: current_user).sum(:gmaprange),
-    a3 = Distance.where(verkehrsmittel: "BICYCLING", user_id: current_user).sum(:gmaprange),
+    a1 = Distance.where(verkehrsmittel: "DRIVING", user_id: current_user).sum(:gmaprange)
+    a2 = Distance.where(verkehrsmittel: "TRANSIT", user_id: current_user).sum(:gmaprange)
+    a3 = Distance.where(verkehrsmittel: "BICYCLING", user_id: current_user).sum(:gmaprange)
     a4 = Distance.where(verkehrsmittel: "WALKING", user_id: current_user).sum(:gmaprange)
     arr = [a1, a2, a3, a4]
   end
