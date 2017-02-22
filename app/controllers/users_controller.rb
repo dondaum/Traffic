@@ -19,7 +19,7 @@ before_action :current_user, only: [:show]
       f.yAxis [
         {title: {text: "Kilomenter", margin: 10} },
       ]
-      f.chart({defaultSeriesType: "column"})
+      f.chart({defaultSeriesType: "line"})
     end
 
     @chart4 = LazyHighCharts::HighChart.new('pie') do |f|
