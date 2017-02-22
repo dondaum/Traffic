@@ -13,12 +13,7 @@ before_action :current_user, only: [:show]
     @chart1 = LazyHighCharts::HighChart.new('graph') do |f|
       f.title(text: "Zurückgelegte Kilometer nach Verkehrsmittel")
       f.xAxis(categories:  ["Auto", "öffentlicher Verkehr", "Fahrrad", "Zu Fuss"])
-      f.series(name: "Kilomenter", yAxis: 0, data: [
-          Distance.where(verkehrsmittel: "DRIVING", user_id: current_user).sum(:gmaprange),
-          Distance.where(verkehrsmittel: "TRANSIT", user_id: current_user).sum(:gmaprange),
-          Distance.where(verkehrsmittel: "BICYCLING", user_id: current_user).sum(:gmaprange),
-          Distance.where(verkehrsmittel: "WALKING", user_id: current_user).sum(:gmaprange)
-        ]
+      f.series(name: "Kilomenter", yAxis: 0, data: data_dream
        )
 
       f.yAxis [
