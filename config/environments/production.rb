@@ -59,11 +59,11 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :port         => ENV[587]
-    :address      => ENV["smtp.mailgun.org"]
-    :user_name    => ENV["postmaster@appd04c92a996bb40458b3d38693d4524b7.mailgun.org"]
-    :password     => ENV["8f9155715005f211ce0f47dd39c90858"]
-    :domain       => ENV["floating-reef-63299.herokuapp.com"]
+    :port         => 587,
+    :address      => "smtp.mailgun.org",
+    :user_name    => "postmaster@appd04c92a996bb40458b3d38693d4524b7.mailgun.org",
+    :password     => "8f9155715005f211ce0f47dd39c90858",
+    :domain       => "floating-reef-63299.herokuapp.com",
     :authentication => :plain
 }
 
