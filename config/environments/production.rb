@@ -57,9 +57,9 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "traffic_#{Rails.env}"
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.delivery_method = :smtp
+#  config.action_mailer.delivery_method = :smtp
 
-  config.action_mailer.smtp_settings = {
+#  config.action_mailer.smtp_settings = {
     :port         => 587,
     :address      => "smtp.gmail.com",
     :user_name    => "sebastian.daum89@gmail.com",
