@@ -64,9 +64,8 @@ Rails.application.configure do
     :user_name    => ENV["postmaster@appd04c92a996bb40458b3d38693d4524b7.mailgun.org"]
     :password     => ENV["8f9155715005f211ce0f47dd39c90858"]
     :domain       => ENV["floating-reef-63299.herokuapp.com"]
-    :authentication => :plain,
-
-  }
+    :authentication => :plain
+}
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
