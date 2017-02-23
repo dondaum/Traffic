@@ -57,6 +57,17 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "traffic_#{Rails.env}"
   config.action_mailer.perform_caching = false
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :port         => ENV[587]
+    :address      => ENV["smtp.mailgun.org"]
+    :user_name    => ENV["postmaster@appd04c92a996bb40458b3d38693d4524b7.mailgun.org"]
+    :password     => ENV["8f9155715005f211ce0f47dd39c90858"]
+    :domain       => ENV["floating-reef-63299.herokuapp.com"]
+    :authentication => :plain,
+
+  }
+
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
