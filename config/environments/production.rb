@@ -60,13 +60,13 @@ Rails.application.configure do
 #  config.action_mailer.delivery_method = :smtp
 
 #  config.action_mailer.smtp_settings = {
-    :port         => 587,
-    :address      => "smtp.gmail.com",
-    :user_name    => "sebastian.daum89@gmail.com",
-    :password     => "Frittenbude1",
-    :domain       => "floating-reef-63299.herokuapp.com",
-    :authentication => :plain
-}
+#    :port         => 587,
+#    :address      => "smtp.gmail.com",
+#    :user_name    => "sebastian.daum89@gmail.com",
+#    :password     => "Frittenbude1",
+#    :domain       => "floating-reef-63299.herokuapp.com",
+#    :authentication => :plain
+#}
 
 
 #  config.action_mailer.smtp_settings = {
