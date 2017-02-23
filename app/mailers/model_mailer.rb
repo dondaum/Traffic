@@ -9,6 +9,6 @@ class ModelMailer < ApplicationMailer
 
   def new_record_notification(record)
     @user = user
-    mail to: "sebastian.daum89@gmail.com", subject: "Success! You did it."
+    mail to: "sebastian.daum89@gmail.com", subject: "Success! You did it. test"
   end
 end
