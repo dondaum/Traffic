@@ -94,7 +94,6 @@ before_action :current_user, only: [:show]
         flash[:success] = "Sie haben sich erfolgreich registriert!"
         redirect_to @user # Handle a successful save.
         ModelMailer.new_record_notification(@user).deliver
-        redirect_to @user
       else
         render 'new'
       end
