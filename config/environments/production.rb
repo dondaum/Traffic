@@ -57,26 +57,23 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "traffic_#{Rails.env}"
   config.action_mailer.perform_caching = false
 
-#  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method = :smtp
 
-#  config.action_mailer.smtp_settings = {
-#    :port         => 587,
-#    :address      => "smtp.gmail.com",
-#    :user_name    => "sebastian.daum89@gmail.com",
-#    :password     => "Frittenbude1",
-#    :domain       => "floating-reef-63299.herokuapp.com",
-#    :authentication => :plain
-#}
+  config.action_mailer.raise_delivery_errors = true
 
+  config.action_mailer.perform_deliveries = true
 
-#  config.action_mailer.smtp_settings = {
-#    :port         => 587,
-#    :address      => "smtp.mailgun.org",
-#    :user_name    => "postmaster@appd04c92a996bb40458b3d38693d4524b7.mailgun.org",
-#    :password     => "8f9155715005f211ce0f47dd39c90858",
-#    :domain       => "floating-reef-63299.herokuapp.com",
-#    :authentication => :plain
-#}
+  config.action_mailer.perform_caching = false
+
+  config.action_mailer.smtp_settings = {
+        :port         => 587,
+        :address      => "smtp.mailgun.org",
+        :user_name    => "postmaster@sandbox470e2d30a4f24547915523ce04bfece9.mailgun.org",
+        :password     => "4f991f96349622f9e96d11b553c523fd",
+        :domain       => "floating-reef-63299.herokuapp.com",
+        :authentication => :plain
+    }
+
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-before_action :current_user, only: [:show]
+before_action :correct_user, only: [:show]
 
   def new
     @user = User.new
@@ -93,7 +93,7 @@ before_action :current_user, only: [:show]
         log_in @user
         flash[:success] = "Sie haben sich erfolgreich registriert!"
         redirect_to @user # Handle a successful save.
-      #  ModelMailer.new_record_notification(@user).deliver
+        ModelMailer.new_record_notification(@user).deliver
       else
         render 'new'
       end
@@ -138,7 +138,7 @@ before_action :current_user, only: [:show]
   # Confirms the correct user.
   def correct_user
     @user = User.find(params[:id])
-    redirect_to(root_url) unless current_user?(@user)
+    redirect_to current_user unless current_user == @user
   end
 
   def giv_me_date

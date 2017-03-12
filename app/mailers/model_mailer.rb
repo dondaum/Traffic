@@ -9,6 +9,6 @@ class ModelMailer < ApplicationMailer
 
   def new_record_notification(user)
     @user = user
-    mail to: "sebastian.daum89@gmail.com", subject: "Success! You did it. test"
+    mail to: "sebastian.daum89@gmail.com", subject: "Ein neuer User hat sich für die Travel App registriert"
   end
 end
