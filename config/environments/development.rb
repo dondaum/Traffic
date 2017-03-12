@@ -45,16 +45,6 @@ Rails.application.configure do
         :authentication => :plain
     }
 
-
-#  config.action_mailer.smtp_settings = {
-#      :port         => 587,
-#      :address      => "smtp.gmail.com",
-#      :user_name    => "sebastian.daum89@gmail.com",
-#      :password     => "frittenbude",
-#      :domain       => "floating-reef-63299.herokuapp.com",
-#      :authentication => :plain
-#  }
-
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
