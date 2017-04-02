@@ -39,8 +39,8 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
         :port         => 587,
         :address      => "smtp.mailgun.org",
-        :user_name    => "postmaster@sandbox470e2d30a4f24547915523ce04bfece9.mailgun.org",
-        :password     => "4f991f96349622f9e96d11b553c523fd",
+        :user_name    =>  Rails.application.secrets.secret_mailgun_account ,
+        :password     =>  Rails.application.secrets.secret_mailgung_password ,
         :domain       => "floating-reef-63299.herokuapp.com",
         :authentication => :plain
     }
