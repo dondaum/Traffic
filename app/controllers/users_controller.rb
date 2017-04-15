@@ -90,10 +90,12 @@ before_action :correct_user, only: [:show]
   def create
       @user = User.new(user_params)
       if @user.save
-        log_in @user
-        flash[:success] = "Sie haben sich erfolgreich registriert!"
-        redirect_to @user # Handle a successful save.
-        ModelMailer.new_record_notification(@user).deliver
+        @user.send_activation_email
+        flash[:info] = "Wir haben eine Aktivierungs-E-Mail an Ihr Postfach geschickt. Bitte aktivieren Sie Ihren Account."
+        redirect_to root_url
+        #log_in @user
+        #flash[:success] = "Sie haben sich erfolgreich registriert!"
+        #redirect_to @user # Handle a successful save.
       else
         render 'new'
       end

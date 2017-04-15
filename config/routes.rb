@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   post '/distance',  to: 'distances#create'
   delete '/distance',  to: 'distances#destroy'
   resources :distances
+  resources :account_activatios, only: [:edit]
 
 
 

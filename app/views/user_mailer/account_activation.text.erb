@@ -1,0 +1,5 @@
+Hi <%= @user.first_name %>,
+
+Willkommen bei der Travel-App. Klicken Sie folgenden Link um Ihren Account zu
+aktivieren:
+<%= edit_account_activatio_url(@user.activation_token, email: @user.email) %>
