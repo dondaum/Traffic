@@ -34,7 +34,7 @@
               <td><%= distance.created_at %></td>
               <td><%= distance.range %></td>
               <td><%= distance.gmaprange %></td>
-              <td><%= link_to "Eintrag löschen", distance, method: :delete, data: { confirm: "Sind Sie sicher?" }%></td>
+              <td><%= link_to "Eintrag löschen", { action: :destroy, id: distance.id }, method: :delete, data: { confirm: "Sind Sie sicher?" }%></td>
             </tr>
           <% end %>
         </tbody>

@@ -53,7 +53,7 @@
         travelMode:  google.maps.TravelMode[mode1]
     };
     directionsService.route(request, function(response, status) {
-      if (status == google.maps.DirectionsStatus.OK) {
+      if (status == google.maps.DirectionsStatus.OK || status == google.maps.DirectionsStatus.ZERO_RESULTS) {
         directionsDisplay.setDirections(response);
         var gdistance = response.routes[0].legs[0].distance.value; //distance in meter
         var x = document.getElementById("Entfernung");
