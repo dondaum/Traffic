@@ -29,7 +29,7 @@
        <label for = "Entfernung"> Entfernung in Kilomenter:</label>
        <input type="number" step= "any" class="form-control" id="Entfernung" name="distance[gmaprange]">
      </div>
-     <button type="button" onclick="calcRoute()" class="btn btn-info">Berechnen</button>
+     <button type="button" onclick="calcRoute();return false" class="btn btn-info">Berechnen</button>
      <button type="submit" value="Submit This Form" class="btn btn-success">Speichern</button>
      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
    </form>

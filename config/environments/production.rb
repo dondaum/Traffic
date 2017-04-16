@@ -71,14 +71,12 @@ Rails.application.configure do
 
   config.action_mailer.smtp_settings = {
         :port         => 587,
-        :address      => "email-smtp.eu-west-1.amazonaws.com",
-        :user_name    =>  Rails.application.secrets.secret_aws_account ,
-        :password     =>  Rails.application.secrets.secret_aws_password ,
-      #  :domain       => "floating-reef-63299.herokuapp.com",
-        :authentication => :login,
-        :enable_starttls_auto => true
+        :address      => "smtp.mailgun.org",
+        :user_name    =>  Rails.application.secrets.secret_mailgun_account ,
+        :password     =>  Rails.application.secrets.secret_mailgun_password ,
+  #      :domain       => "floating-reef-63299.herokuapp.com",
+        :authentication => :plain
     }
-
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
