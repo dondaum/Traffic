@@ -18,7 +18,6 @@
 //= require highcharts/highcharts
 //= require highcharts/highcharts-more
 //= require highcharts/highstock
-//= require highcharts/adapters/standalone-framework
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree.
