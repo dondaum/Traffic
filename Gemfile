@@ -17,6 +17,8 @@ gem 'lazy_high_charts'
 gem 'highcharts-rails'
 # Gmaps4rails to simply create a Google Maps
 gem 'gmaps4rails'
+# figaro for production
+gem 'figaro'
 # Get underscore_js
 gem 'underscore-rails'
 # font-awesome-rails web fonts
